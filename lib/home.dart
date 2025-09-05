@@ -82,7 +82,7 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          ElevatedButton(onPressed: (){}, child: Text("Reset"))
+          ElevatedButton(onPressed: (){}, child: Text("Reset",style: GoogleFonts.abel(fontWeight: FontWeight.bold),))
         ],
       ),
     );
