@@ -21,7 +21,7 @@ class _HomepageState extends State<Homepage> {
       } else if (!board.contains("")) {
         winner = " its draw";
       } else {
-        currentplayer == "X" ? "O" : "X";
+        currentplayer == "X" ? currentplayer="O" : currentplayer="X";
       }
     }
   }
@@ -82,6 +82,7 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
+          ElevatedButton(onPressed: (){}, child: Text("Reset"))
         ],
       ),
     );
