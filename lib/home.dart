@@ -21,7 +21,7 @@ class _HomepageState extends State<Homepage> {
       } else if (!board.contains("")) {
         winner = " its draw";
       } else {
-        currentplayer == "X" ? currentplayer="O" : currentplayer="X";
+        currentplayer == "X" ? currentplayer = "O" : currentplayer = "X";
       }
     }
   }
@@ -59,8 +59,9 @@ class _HomepageState extends State<Homepage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox( width: MediaQuery.of(context).size.width*0.7,
-          height: MediaQuery.of(context).size.height*0.7,
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: MediaQuery.of(context).size.height * 0.7,
             child: GridView.builder(
               padding: EdgeInsets.all(4),
               shrinkWrap: true,
@@ -71,7 +72,7 @@ class _HomepageState extends State<Homepage> {
               itemBuilder: (context, index) => GestureDetector(
                 onTap: () {
                   setState(() {
-                    board[index]=currentplayer;
+                    board[index] = currentplayer;
                   });
                 },
                 child: Container(
@@ -82,9 +83,24 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          ElevatedButton(onPressed: (){}, child: Text("Reset",style: GoogleFonts.abel(fontWeight: FontWeight.bold),))
+          ElevatedButton(
+            onPressed: () {},
+            child: Text(
+              "Reset",
+              style: GoogleFonts.abel(fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
       ),
     );
   }
 }
+/*Tic Tac Toe (also called Noughts and Crosses) is a classic two-player game played on a 3×3 grid.
+
+Players take turns marking a cell with either X or O.
+
+The goal is to get three of your marks in a row — horizontally, vertically, or diagonally.
+
+If all cells are filled without a winner, the game ends in a draw.
+
+It’s one of the simplest strategy games, often used to teach the basics of game design and logic.*/
