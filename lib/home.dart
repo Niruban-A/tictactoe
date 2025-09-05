@@ -103,4 +103,29 @@ The goal is to get three of your marks in a row — horizontally, vertically, or
 
 If all cells are filled without a winner, the game ends in a draw.
 
-It’s one of the simplest strategy games, often used to teach the basics of game design and logic.*/
+It’s one of the simplest strategy games, often used to teach the basics of game design and logic.
+✨ Custom Themes → Light / Dark mode or colorful boards.
+
+🎶 Sound Effects & Animations → add a sound when tapping, winning, or resetting.
+
+🖼️ Custom Symbols → instead of X and O, use images or emojis.
+
+🎮 Gameplay Features
+
+🧠 Single Player Mode with AI → implement an opponent using Minimax algorithm or a simpler AI.
+
+📊 Scoreboard → keep track of wins, losses, and draws.
+
+🔄 Undo / Redo → allow players to undo their last move.
+
+⏱️ Timer Mode → each player has limited time per move.
+
+🔢 Variable Board Size → allow 4×4 or 5×5 grids for harder games.
+
+🌐 Online Features
+
+👥 Multiplayer (Local & Online) →
+
+Local: two players play on the same device.
+
+Online: use Firebase or WebSockets to play with friends remotely.*/
