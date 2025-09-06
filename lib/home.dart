@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,13 +11,12 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  @override
   var currentplayer = "X";
   var winner = "";
   List<String> board = List.filled(9, '');
   void move(int index) {
     if (board[index] == "" && winner == "") {
-      board.insert(index, currentplayer);
+      board[index] = currentplayer;
       if (checkwinner(currentplayer)) {
         winner = "$currentplayer is the winner!!";
       } else if (!board.contains("")) {
@@ -24,6 +25,7 @@ class _HomepageState extends State<Homepage> {
         currentplayer == "X" ? currentplayer = "O" : currentplayer = "X";
       }
     }
+    print(winner);
   }
 
   bool checkwinner(String currentplayer) {
@@ -38,15 +40,16 @@ class _HomepageState extends State<Homepage> {
       [2, 4, 6],
     ];
     for (List pattern in winning_possibilities) {
-      if (pattern[0] == currentplayer &&
-          pattern[1] == currentplayer &&
-          pattern[2] == currentplayer) {
+      if (board[pattern[0]] == currentplayer &&
+          board[pattern[1]] == currentplayer &&
+          board[pattern[2]] == currentplayer) {
         return true;
       }
     }
     return false;
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -58,31 +61,46 @@ class _HomepageState extends State<Homepage> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
-            height: MediaQuery.of(context).size.height * 0.7,
-            child: GridView.builder(
-              padding: EdgeInsets.all(4),
-              shrinkWrap: true,
-              itemCount: 9,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  setState(() {
-                    board[index] = currentplayer;
-                  });
-                },
-                child: Container(
-                  margin: EdgeInsets.all(4),
-                  decoration: BoxDecoration(color: Colors.transparent),
-                  child: Text(currentplayer),
+          Expanded(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.3,
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: GridView.builder(
+                padding: EdgeInsets.all(4),
+              
+                shrinkWrap: true,
+                itemCount: 9,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                ),
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      move(index);
+                    });
+                  },
+                  child: Container(
+                    margin: EdgeInsets.all(4),
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Center(
+                      child: Text(
+                        board[index],
+                        style: GoogleFonts.abel(
+                          fontSize: 120,
+                          color: Colors.amber[700],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
+          SizedBox(height: 30),
+          Text(winner),
+          SizedBox(height: 30),
           ElevatedButton(
             onPressed: () {},
             child: Text(
@@ -95,6 +113,7 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
+
 /*Tic Tac Toe (also called Noughts and Crosses) is a classic two-player game played on a 3×3 grid.
 
 Players take turns marking a cell with either X or O.
