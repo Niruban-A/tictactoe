@@ -102,7 +102,12 @@ class _HomepageState extends State<Homepage> {
           Text(winner),
           SizedBox(height: 30),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+          setState(() {
+            board=List.filled(9, "");
+            winner="";
+          });
+            },
             child: Text(
               "Reset",
               style: GoogleFonts.abel(fontWeight: FontWeight.bold),
