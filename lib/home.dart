@@ -59,37 +59,42 @@ class _HomepageState extends State<Homepage> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.3,
-              height: MediaQuery.of(context).size.height * 0.3,
-              child: GridView.builder(
-                padding: EdgeInsets.all(4),
-              
-                shrinkWrap: true,
-                itemCount: 9,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                ),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      move(index);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.all(4),
-                    decoration: BoxDecoration(color: Colors.white),
-                    child: Center(
-                      child: Text(
-                        board[index],
-                        style: GoogleFonts.abel(
-                          fontSize: 120,
-                          color: Colors.amber[700],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("$currentplayer 's turn",style: GoogleFonts.abel(
+                            fontSize: 50,
+                            color: Colors.amber[700],)),
+            Expanded(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: GridView.builder(
+                  padding: EdgeInsets.all(4),
+                
+                  shrinkWrap: true,
+                  itemCount: 9,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                  ),
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        move(index);
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(4),
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Center(
+                        child: Text(
+                          board[index],
+                          style: GoogleFonts.abel(
+                            fontSize: 120,
+                            color: Colors.amber[700],
+                          ),
                         ),
                       ),
                     ),
@@ -97,23 +102,23 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 30),
-          Text(winner),
-          SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: () {
-          setState(() {
-            board=List.filled(9, "");
-            winner="";
-          });
-            },
-            child: Text(
-              "Reset",
-              style: GoogleFonts.abel(fontWeight: FontWeight.bold),
+            SizedBox(height: 30),
+            Text(winner),
+            SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+            setState(() {
+              board=List.filled(9, "");
+              winner="";
+            });
+              },
+              child: Text(
+                "Reset",
+                style: GoogleFonts.abel(fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
