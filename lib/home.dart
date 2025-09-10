@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Homepage extends StatefulWidget {
@@ -20,9 +21,9 @@ class _HomepageState extends State<Homepage> {
     if (board[index] == "" && winner == "") {
       board[index] = currentplayer;
       if (checkwinner(currentplayer)) {
-        winner = "$currentplayer is the winner!!";
+        winner = playerturn;
       } else if (!board.contains("")) {
-        winner = " its draw";
+        winner = "draw";
       } else {
         currentplayer == "X" ? currentplayer = "O" : currentplayer = "X";
         playerturn == playername1
@@ -77,7 +78,7 @@ class _HomepageState extends State<Homepage> {
               controller: player2,
 
               decoration: InputDecoration(
-                label: Text("Enter  2st player name"),
+                label: Text("Enter  2nd player name"),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -99,7 +100,14 @@ class _HomepageState extends State<Homepage> {
       ],
     );
     return Scaffold(
+      backgroundColor: Colors.blueGrey,
+      
       appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.vertical(
+            bottom: Radius.circular(4),
+          ),
+        ),
         title: Text(
           "Tic Tac Toe",
           style: GoogleFonts.abel(fontWeight: FontWeight.bold),
@@ -108,24 +116,33 @@ class _HomepageState extends State<Homepage> {
       ),
       body: Stack(
         children: [
+          SizedBox(height: 10),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  winner == ""
-                      ? (playerturn == "" ? "Hi Gamers" : "$playerturn's turn")
-                      : "the winner is $playerturn",
-                  style: GoogleFonts.abel(
-                    fontSize: 50,
-                    color: Colors.amber[700],
+                Center(
+                  child: Text(
+                    winner == ""
+                        ? (playerturn == ""
+                              ? "Hi Gamers"
+                              : "$playerturn's turn")
+                        : (winner == "draw"
+                              ? "Match Draw"
+                              : "The winner is $playerturn !!!"),
+                    style: GoogleFonts.abel(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.amber[700],
+                    ),
                   ),
                 ),
+                SizedBox(height: 10),
                 Expanded(
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: MediaQuery.of(context).size.height * 0.6,
                     child: GridView.builder(
                       padding: EdgeInsets.all(4),
 
@@ -144,12 +161,21 @@ class _HomepageState extends State<Homepage> {
                           margin: EdgeInsets.all(4),
                           decoration: BoxDecoration(color: Colors.white),
                           child: Center(
-                            child: Text(
-                              board[index],
-                              style: GoogleFonts.abel(
-                                fontSize: 120,
-                                color: Colors.amber[700],
-                              ),
+                            child: LayoutBuilder(
+                              builder:
+                                  (
+                                    BuildContext context,
+                                    BoxConstraints constraints,
+                                  ) {
+                                    return Text(
+                                      board[index],
+                                      style: GoogleFonts.abel(
+                                        fontSize: constraints.maxWidth * 0.5,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.amber[700],
+                                      ),
+                                    );
+                                  },
                             ),
                           ),
                         ),
@@ -157,14 +183,14 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
-                SizedBox(),
                 ElevatedButton(
                   onPressed: () {
-                     setState(() {
+                    setState(() {
                       board = List.filled(9, "");
                       winner = "";
-                      playerturn==playername1?playerturn=playername2:playerturn=playername1;
-
+                      playerturn == playername1
+                          ? playerturn = playername2
+                          : playerturn = playername1;
                     });
                   },
                   child: Text(
@@ -189,6 +215,7 @@ class _HomepageState extends State<Homepage> {
                     style: GoogleFonts.abel(fontWeight: FontWeight.bold),
                   ),
                 ),
+                SizedBox(height: 250),
               ],
             ),
           ),
